@@ -13,6 +13,11 @@ class CategoryViewsets(viewsets.ModelViewSet):
   def perform_create(self, serializer):
     serializer.save(owner=self.request.user)
 
+  def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context
+
 class TaskViewSet(viewsets.ModelViewSet):
   serializer_class = TaskSerializer
   permission_classes = [permissions.IsAuthenticated]

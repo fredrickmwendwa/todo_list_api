@@ -6,6 +6,9 @@ class Category(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='categories')
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        unique_together = ('name', 'owner')
+
     def __str__(self):
         return self.name
 
